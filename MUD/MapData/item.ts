@@ -1,8 +1,8 @@
-import { itemList } from './data';
-import { Status } from './interface';
+import { ItemList } from '../data';
+import { Status } from '../interface';
 
 export class Item {
-    constructor(private _status: Status, private _itemList: itemList) {}
+    constructor(private _status: Status, private _itemList: ItemList) {}
 
     randomItem() {
         const itemKind = Math.floor(Math.random() * this._itemList.item.length);
@@ -13,11 +13,11 @@ export class Item {
             case 0:
                 this._status.hp = 1.5;
 
-                return { name: this._itemList.item[itemKind] };
+                return { map: '아이템', name: this._itemList.item[itemKind], state: this._status };
             case 1:
                 this._status.atk = Math.floor(Math.random() * 10);
 
-                return this._itemList.item[itemKind];
+                return { map: '아이템', name: this._itemList.item[itemKind], state: this._status };
             default:
                 return;
         }
