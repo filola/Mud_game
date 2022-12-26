@@ -1,11 +1,12 @@
 import { PlayerClassList } from 'MUD/data';
 
 export class PlayerClass {
-    constructor(private _playerClass: PlayerClassList) {}
+    constructor(private _playerClassList: PlayerClassList) {}
 
-    selectClass(classId: number) {
-        if (this._playerClass.playerClass[classId]) {
-            return { player: this._playerClass.playerClass[classId], level: 1 };
+    selectClass(classId: string) {
+        console.log(classId);
+        if (this._playerClassList.playerClass[classId]) {
+            return this._playerClassList.playerClass[classId];
         }
     }
 }

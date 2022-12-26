@@ -14,6 +14,7 @@ export class Enemy {
 
         this._status.hp = level * 30;
         this._status.atk = level * 5;
+        this._status.exp = level * 10;
 
         return { map: '적 등장', name: '도깨비', level: level, status: this._status };
     }

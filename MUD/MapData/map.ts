@@ -20,7 +20,7 @@ export class MapMaker {
                     // console.log(this._mapKind.randomRoom());
 
                     this._data.map[x][y] = this._mapKind.randomRoom();
-                    // console.log(this._data.map[x][y]);
+                    console.log(this._data.map[x][y]);
                 }
             }
         }

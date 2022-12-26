@@ -1,10 +1,12 @@
-import { EnemyList, ItemList, MapData, NPCList } from './data';
+import { EnemyList, ItemList, MapData, NPCList, PlayerClassList } from './data';
 import { Enemy } from './MapData/enemy';
-import { Status } from './interface';
+import { PlayerStatus, Status } from './interface';
 import { Item } from './MapData/item';
 import { MapMaker } from './MapData/map';
 import { MapKind } from './MapData/mapKind';
 import { NPC } from './MapData/NPC';
+import { GameInput } from './command/input';
+import { PlayerClass } from './player/playerClass';
 
 const status = new Status();
 
@@ -23,4 +25,12 @@ const mapData = new MapData();
 const mapKind = new MapKind(enemy, npc, item);
 const map = new MapMaker(mapKind, mapData);
 
+// Player 생성
+const playerStatus = new PlayerStatus();
+const playerClassList = new PlayerClassList(playerStatus);
+const playerClass = new PlayerClass(playerClassList);
+const gamestart = new GameInput(playerClassList, playerClass);
+
 map.makeMap(3);
+
+gamestart.startGame();

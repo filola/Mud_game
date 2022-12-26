@@ -19,5 +19,5 @@ export class NPCList {
 export class PlayerClassList {
     constructor(private _playerStatus: PlayerStatus) {}
 
-    playerClass = [{ class: '전사', status: this._playerStatus }];
+    playerClass = [{ class: '전사', level: 1, status: this._playerStatus }];
 }
