@@ -9,6 +9,7 @@ import { GameInput } from './command/input';
 import { PlayerClass } from './player/playerClass';
 import { Command } from './command/commad';
 import { Interaction } from './command/Interaction';
+import { Player } from './player/player';
 
 const status = new Status();
 const nowLocation = new NowLocation();
@@ -31,7 +32,8 @@ const map = new MapMaker(mapKind, mapData, nowLocation);
 // Player 생성
 const playerStatus = new PlayerStatus();
 const playerClassList = new PlayerClassList(playerStatus);
-const playerClass = new PlayerClass(playerClassList);
+const player = new Player(playerStatus);
+const playerClass = new PlayerClass(playerClassList, player);
 
 const interaction = new Interaction();
 const command = new Command(mapData, nowLocation, interaction);

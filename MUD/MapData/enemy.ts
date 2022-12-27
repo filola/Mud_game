@@ -18,6 +18,4 @@ export class Enemy {
 
         return { map: 'enemy', name: '도깨비', level: level, status: this._status };
     }
-
-    meetEnemy() {}
 }
