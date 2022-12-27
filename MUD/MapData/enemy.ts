@@ -4,7 +4,7 @@ import { Status } from '../interface';
 export class Enemy {
     max: number;
     min: number;
-    constructor(private _status: Status, max: number, min: number, _enemyList: EnemyList) {
+    constructor(private _status: Status, max: number, min: number, private _enemyList: EnemyList) {
         this.max = max;
         this.min = min;
     }
@@ -16,6 +16,8 @@ export class Enemy {
         this._status.atk = level * 5;
         this._status.exp = level * 10;
 
-        return { map: '적 등장', name: '도깨비', level: level, status: this._status };
+        return { map: 'enemy', name: '도깨비', level: level, status: this._status };
     }
+
+    meetEnemy() {}
 }

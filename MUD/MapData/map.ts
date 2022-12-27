@@ -1,12 +1,14 @@
-import { MapData } from '../data';
+import { MapData, NowLocation } from '../data';
 import { MapKind } from './mapKind';
 
 export class MapMaker {
-    constructor(private _mapKind: MapKind, private _data: MapData) {}
+    constructor(private _mapKind: MapKind, private _data: MapData, private _nowLocation: NowLocation) {}
 
     async makeMap(leng: number) {
-        const startValue = this.startPoint(leng);
-        console.log(leng);
+        const startValue = await this.startPoint(leng);
+
+        this._nowLocation.nowX = startValue;
+        this._nowLocation.nowY = startValue;
 
         for (let x = 0; x < leng; x++) {
             this._data.map.push([]);
@@ -17,17 +19,14 @@ export class MapMaker {
                 if (x == startValue && y == startValue) {
                     this._data.map[x][y] = { map: '광장' };
                 } else {
-                    // console.log(this._mapKind.randomRoom());
-
                     this._data.map[x][y] = this._mapKind.randomRoom();
-                    console.log(this._data.map[x][y]);
+                    // console.log(this._data.map[x][y]);
                 }
             }
         }
-        console.log(this._data.map);
     }
 
-    startPoint(leng: number) {
+    async startPoint(leng: number) {
         if (leng % 2 == 1) {
             return (leng - 1) / 2;
         } else {

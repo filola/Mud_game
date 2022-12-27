@@ -13,11 +13,11 @@ export class Item {
             case 0:
                 this._status.hp = 1.5;
 
-                return { map: '아이템', name: this._itemList.item[itemKind], hp: this._status.hp };
+                return { map: 'item', name: this._itemList.item[itemKind], hp: this._status.hp };
             case 1:
                 this._status.atk = Math.floor(Math.random() * 10 + 1);
 
-                return { map: '아이템', name: this._itemList.item[itemKind], atk: this._status.atk };
+                return { map: 'item', name: this._itemList.item[itemKind], atk: this._status.atk };
             default:
                 return;
         }

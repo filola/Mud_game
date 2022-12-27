@@ -4,6 +4,11 @@ export class MapData {
     map = [];
 }
 
+export class NowLocation {
+    nowX: number;
+    nowY: number;
+}
+
 export class EnemyList {
     enemy = [];
 }

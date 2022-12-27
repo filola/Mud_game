@@ -24,4 +24,6 @@ export class NPC {
                 return;
         }
     }
+
+    meetNpc() {}
 }
