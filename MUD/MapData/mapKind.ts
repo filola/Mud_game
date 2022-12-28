@@ -6,7 +6,7 @@ export class MapKind {
     constructor(private enemy: Enemy, private npc: NPC, private item: Item) {}
 
     randomRoom() {
-        const num = Math.floor(Math.random() * 3);
+        const num = Math.floor(Math.random() * 4);
 
         switch (num) {
             case 0:
@@ -16,7 +16,7 @@ export class MapKind {
             case 2:
                 return this.item.randomItem();
             default:
-                return;
+                return { map: '공터' };
         }
     }
 }

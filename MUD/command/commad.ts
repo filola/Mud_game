@@ -31,18 +31,18 @@ export class Command {
         return;
     }
 
-    meetSomthing(data) {
-        const map = data.map;
+    // meetSomthing(data) {
+    //     const map = data.map;
 
-        this.showMap();
+    //     this.showMap();
 
-        switch (map) {
-            case 'item':
-                return this._interaction.meetItem();
-            case 'NPC':
-                return this._interaction.meetNpc();
-            case 'enemy':
-                return this._interaction.meetEnemy();
-        }
-    }
+    //     switch (map) {
+    //         case 'item':
+    //             return this._interaction.meetItem(data);
+    //         case 'NPC':
+    //             return this._interaction.meetNpc(data);
+    //         case 'enemy':
+    //             return this._interaction.meetEnemy(data);
+    //     }
+    // }
 }

@@ -1,9 +1,10 @@
 import { MapData, NowLocation, PlayerClassList } from 'MUD/data';
-import { MapMaker } from 'MUD/MapData/map';
+
 import { PlayerClass } from 'MUD/player/playerClass';
 import * as readline from 'readline';
 import * as util from 'util';
 import { Command } from './commad';
+import { Interaction } from './Interaction';
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -17,6 +18,7 @@ export class GameInput {
         private _nowLocation: NowLocation,
         private _command: Command,
         private _mapData: MapData,
+        private _interaction: Interaction,
     ) {}
 
     startGame() {
@@ -41,31 +43,68 @@ export class GameInput {
     }
 
     selectDirection(inputData: string) {
+        let here;
+
         switch (inputData) {
             case '북':
                 this._nowLocation.nowX -= 1;
 
-                const here = this._mapData.map[this._nowLocation.nowX][this._nowLocation.nowY];
+                here = this._mapData.map[this._nowLocation.nowX][this._nowLocation.nowY];
 
-                return this._command.meetSomthing(here);
+                return this.meetSomthing(here);
             case '남':
                 this._nowLocation.nowX += 1;
 
-                this._mapData.map[this._nowLocation.nowX][this._nowLocation.nowY];
+                here = this._mapData.map[this._nowLocation.nowX][this._nowLocation.nowY];
 
-                return this._command.showMap();
+                return this.meetSomthing(here);
             case '서':
                 this._nowLocation.nowY -= 1;
 
-                this._mapData.map[this._nowLocation.nowX][this._nowLocation.nowY];
+                here = this._mapData.map[this._nowLocation.nowX][this._nowLocation.nowY];
 
-                return this._command.showMap();
+                return this.meetSomthing(here);
             case '동':
                 this._nowLocation.nowY += 1;
 
-                this._mapData.map[this._nowLocation.nowX][this._nowLocation.nowY];
+                here = this._mapData.map[this._nowLocation.nowX][this._nowLocation.nowY];
 
-                return this._command.showMap();
+                return this.meetSomthing(here);
         }
+    }
+
+    async meetSomthing(data) {
+        const map = data.map;
+
+        await this._command.showMap();
+
+        switch (map) {
+            case 'item':
+                await this._interaction.getItem(data);
+
+                return this.inputWay();
+            case 'NPC':
+                await this._interaction.helpNPC(data);
+
+                return this.inputWay();
+            case 'enemy':
+                await this.inputEnemyAction(data);
+            default:
+                return this.inputWay();
+        }
+    }
+
+    async inputEnemyAction(data) {
+        console.log('적 등장\n');
+        console.log('1. 공격');
+        console.log('2. 도망');
+        rl.question('\n어떤 행동을 하시겠습니까?', select => {
+            switch (select) {
+                case '1':
+                    this._interaction.fightEnemy(data);
+                case '2':
+                    this._interaction.runEnemy();
+            }
+        });
     }
 }

@@ -32,12 +32,13 @@ const map = new MapMaker(mapKind, mapData, nowLocation);
 // Player 생성
 const playerStatus = new PlayerStatus();
 const playerClassList = new PlayerClassList(playerStatus);
-const player = new Player(playerStatus);
+const player = new Player();
 const playerClass = new PlayerClass(playerClassList, player);
 
-const interaction = new Interaction();
+// 입력,상호작용
+const interaction = new Interaction(player, nowLocation);
 const command = new Command(mapData, nowLocation, interaction);
-const gamestart = new GameInput(playerClassList, playerClass, nowLocation, command, mapData);
+const gamestart = new GameInput(playerClassList, playerClass, nowLocation, command, mapData, interaction);
 
 map.makeMap(21);
 
